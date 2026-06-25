@@ -15,6 +15,13 @@ export default defineNuxtConfig({
     description: "Проверьте штрафы и зарегистрируйтесь в 1 клик",
     defaultLocale: "ru",
   },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+      ignore: ["/manifest.json"],
+    },
+  },
   eslint: {
     config: {
       stylistic: true,
