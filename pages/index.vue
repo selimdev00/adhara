@@ -1,5 +1,5 @@
 <template>
-  <div class="container space-y-[100px]">
+  <div class="container space-y-20 lg:space-y-28">
     <LandingHero />
 
     <LandingAdvantages />

@@ -1,13 +1,19 @@
 <template>
-  <nuxt-link to="/" class="hover:opacity-70 transition-opacity">
+  <nuxt-link
+    to="/"
+    aria-label="Компас - на главную"
+    class="inline-block rounded transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+  >
     <svg
       width="119"
       height="26"
       viewBox="0 0 119 26"
       fill="none"
+      aria-hidden="true"
+      focusable="false"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_1_18)">
+      <g clip-path="url(#clip0_compas_logo)">
         <path
           d="M112.625 22.305C114.187 22.305 115.525 21.914 116.64 21.133C117.921 20.237 118.578 18.914 118.609 17.164C118.651 14.706 117.479 12.94 115.093 11.867C113.937 11.45 112.567 11.138 110.984 10.93C109.401 10.721 108.244 10.482 107.515 10.21C106.401 9.815 105.843 9.263 105.843 8.555C105.843 8.045 105.984 7.643 106.265 7.352C106.546 7.06 106.937 6.914 107.437 6.914H115.89L117.406 3.242H107.437C105.812 3.242 104.432 3.706 103.297 4.632C102.057 5.632 101.437 6.94 101.437 8.555C101.437 10.659 102.442 12.19 104.453 13.148C105.609 13.586 107.127 13.958 109.007 14.266C110.887 14.573 112.213 14.898 112.984 15.242C113.807 15.617 114.214 16.242 114.203 17.117C114.213 17.637 114.067 18.039 113.765 18.32C113.484 18.529 113.104 18.633 112.625 18.633L97.359 18.628L95.843 22.3L112.625 22.305Z"
           fill="#FD8301"
@@ -58,7 +64,7 @@
         />
       </g>
       <defs>
-        <clipPath id="clip0_1_18">
+        <clipPath id="clip0_compas_logo">
           <rect width="119" height="26" fill="white" />
         </clipPath>
       </defs>

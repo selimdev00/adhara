@@ -6,15 +6,27 @@ const { documents } = storeToRefs(documentStore);
 
 <template>
   <div class="max-w-[1160px] mx-auto space-y-5 pb-20">
-    <h1 class="text-[34px] font-bold text-center" data-aos="fade-up">
-      Документы
-    </h1>
+    <div class="space-y-3 text-center">
+      <p class="text-primary text-sm font-bold uppercase tracking-wider">
+        Документы
+      </p>
 
-    <div class="sm:mx-5 py-1 relative" data-aos="fade-up">
+      <h2 class="text-2xl sm:text-[34px] font-bold">Юридические документы</h2>
+
+      <UITick align="center" />
+    </div>
+
+    <div class="mx-4 sm:mx-5 py-1 relative overflow-hidden">
       <Swiper
         centered-slides-bounds
         center-insufficient-slides
-        :modules="[SwiperPagination, SwiperNavigation]"
+        :modules="[SwiperPagination, SwiperNavigation, SwiperA11y]"
+        :a11y="{
+          enabled: true,
+          prevSlideMessage: 'Предыдущий документ',
+          nextSlideMessage: 'Следующий документ',
+          paginationBulletMessage: 'Перейти к документу {{index}}',
+        }"
         :navigation="{
           nextEl: '.next',
           prevEl: '.prev',
@@ -41,41 +53,46 @@ const { documents } = storeToRefs(documentStore);
           class="p-4 flex justify-center items-center"
         >
           <div
-            class="shadow-card h-[450px] xl:w-[340px] max-w-[340px] w-full flex flex-col justify-between rounded-xl px-6 pt-5 pb-8 mx-auto"
+            class="shadow-card border border-gray-card-200 min-h-[420px] sm:h-[450px] xl:w-[340px] max-w-[340px] w-full flex flex-col justify-between rounded-xl px-6 pt-5 pb-8 mx-auto"
           >
             <div class="space-y-4">
-              <h2
-                class="font-bold text-primary-dark text-[31px] leading-[37.2px]"
+              <h3
+                class="font-bold text-primary-dark text-2xl sm:text-[31px] leading-tight sm:leading-[37.2px]"
               >
                 {{ item.title }}
-              </h2>
+              </h3>
 
-              <p class="text-lg leading-[21.6px]">
+              <p class="text-base sm:text-lg leading-[21.6px]">
                 {{ item.text }}
               </p>
             </div>
 
-            <UIButton class="w-full text-lg" :to="`/documents/${item.id}`"
+            <UIButton
+              class="w-full text-lg"
+              :to="`/documents/${item.id}`"
+              :aria-label="`Перейти: ${item.title}`"
               >Перейти</UIButton
             >
           </div>
         </SwiperSlide>
 
-        <div class="pagination -mt-[6px] flex justify-center"></div>
+        <div class="pagination !mt-2 flex justify-center"></div>
       </Swiper>
 
       <button
-        class="prev cursor-pointer absolute bottom-52 -left-4 z-10 hover:opacity-70 transition"
+        type="button"
+        aria-label="Предыдущий документ"
+        class="prev hidden sm:grid place-items-center absolute top-1/2 -translate-y-1/2 left-0 z-10 w-10 h-10 rounded-full bg-white shadow-card text-primary-dark hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
       >
         <IconSliderArrowLeft />
       </button>
 
       <button
-        class="next cursor-pointer absolute bottom-52 -right-4 z-10 hover:opacity-70 transition"
+        type="button"
+        aria-label="Следующий документ"
+        class="next hidden sm:grid place-items-center absolute top-1/2 -translate-y-1/2 right-0 z-10 w-10 h-10 rounded-full bg-white shadow-card text-primary-dark hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
       >
-        <span>
-          <IconSliderArrowRight />
-        </span>
+        <IconSliderArrowRight />
       </button>
     </div>
   </div>
@@ -83,13 +100,13 @@ const { documents } = storeToRefs(documentStore);
 
 <style lang="scss">
 .pagination {
-  @apply flex items-center gap-1;
+  @apply flex items-center gap-1.5;
 
   &__bullet {
-    @apply w-[7px] h-[7px] rounded-full bg-gray-bullet hover:opacity-70 cursor-pointer transition;
+    @apply w-[7px] h-[7px] rounded-full bg-gray-bullet hover:opacity-70 cursor-pointer;
 
     &--active {
-      @apply w-[10px] h-[10px] bg-primary;
+      @apply w-5 bg-primary;
     }
   }
 }

@@ -10,59 +10,80 @@ const validationSchema = object().shape({
 
 const { handleSubmit, resetForm } = useForm({ validationSchema });
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(() => {
   useNuxtApp().$toast.info("Данные отправлены");
   resetForm();
 });
 </script>
 
 <template>
-  <section class="grid xl:grid-cols-2 justify-items-center overflow-hidden">
-    <form @submit.prevent="onSubmit" class="md:mt-20 mt-10 space-y-4">
+  <section class="grid xl:grid-cols-2 items-center justify-items-center overflow-hidden">
+    <form
+      @submit.prevent="onSubmit"
+      class="w-full max-w-[560px] xl:max-w-none md:mt-20 mt-10 space-y-4"
+    >
       <h1
-        class="font-bold md:text-[41px] text-3xl md:leading-[49.2px]"
-        data-aos="fade-up"
+        class="font-bold md:text-[41px] text-3xl md:leading-[49.2px] tracking-tight"
       >
-        Проверьте штрафы и зарегестрируйтесь в 1 клик
+        Проверьте штрафы и зарегистрируйтесь в 1 клик
       </h1>
 
-      <div class="space-y-3" data-aos="fade-up" data-aos-delay="100">
+      <div class="space-y-3">
         <div class="flex lg:flex-nowrap flex-wrap gap-x-8 gap-3">
           <UIFormField
-            v-slot="{ id }"
+            v-slot="{ id, invalid, describedby }"
             name="carNumber"
             label="Номер автомобиля"
             class="xl:w-[320px] xl:shrink-0"
           >
-            <UIFormInputText :id="id" />
+            <UIFormInputText
+              :id="id"
+              type="text"
+              autocomplete="off"
+              :aria-invalid="invalid"
+              :aria-describedby="describedby"
+            />
           </UIFormField>
 
-          <UIFormField v-slot="{ id }" name="region" label="Регион">
-            <UIFormInputText :id="id" />
+          <UIFormField
+            v-slot="{ id, invalid, describedby }"
+            name="region"
+            label="Регион"
+          >
+            <UIFormInputText
+              :id="id"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              :aria-invalid="invalid"
+              :aria-describedby="describedby"
+            />
           </UIFormField>
         </div>
 
         <UIFormField
+          v-slot="{ id, invalid, describedby }"
           name="insurance"
           label="Свидетельство о регистрации ТС"
-          v-slot="{ id }"
         >
-          <UIFormInputText :id="id" />
+          <UIFormInputText
+            :id="id"
+            type="text"
+            autocomplete="off"
+            :aria-invalid="invalid"
+            :aria-describedby="describedby"
+          />
         </UIFormField>
       </div>
 
-      <div
-        class="flex items-center gap-x-[19px] gap-y-4 flex-wrap"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
+      <div class="flex items-center gap-x-[19px] gap-y-4 flex-wrap">
         <UIButton class="h-[45px] !px-[18px] !text-lg" type="submit">
           Проверить штрафы
           <IconArrowRight />
         </UIButton>
 
         <VideoPopup
-          video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?si=boLAlEtKYspTEhP_&autoplay=1"
+          video-url="https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
         >
           <template #trigger>
             <UIButton
@@ -74,30 +95,27 @@ const onSubmit = handleSubmit((values) => {
                 <IconYoutube />
               </span>
 
-              <span class="text-black">О сервисе</span>
+              <span>О сервисе</span>
 
-              <span class="text-[15px]">(1 мин. 20 сек)</span>
+              <span class="text-[15px] text-gray-text">(1 мин. 20 сек)</span>
             </UIButton>
           </template>
         </VideoPopup>
       </div>
 
-      <p
-        class="text-gray-text text-[13px] leading-[15.6px]"
-        data-aos="fade-up"
-        data-aos-delay="300"
-      >
+      <p class="text-gray-text text-[13px] leading-[15.6px]">
         Нажимая «Проверить штрафы» вы соглашаетесь с политикой обработки
         персональных данных и принимаете оферту
       </p>
     </form>
 
     <nuxt-img
-      data-aos="fade-left"
-      data-aos-delay="400"
       src="/images/compas-landing-image.png"
+      alt="Интерфейс сервиса Компас на ноутбуке и смартфоне"
+      width="640"
+      height="430"
       densities="x1 x2"
-      class="w-full p-6 mt-14"
+      class="w-full max-w-[640px] mx-auto p-2 sm:p-6 mt-6 sm:mt-14"
     />
   </section>
 </template>

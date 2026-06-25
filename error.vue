@@ -15,10 +15,14 @@ const handleError = () => clearError({ redirect: "/" });
     >
       <div class="space-y-1">
         <h1 class="font-bold text-2xl">Похоже что-то пошло не так</h1>
-        <p>{{ error.statusCode }} | {{ error.statusMessage }}</p>
+        <p class="text-gray-text">
+          {{ error.statusCode }}<template v-if="error.statusMessage">
+            | {{ error.statusMessage }}</template
+          >
+        </p>
       </div>
 
-      <UIButton @click="handleError" class="w-full">Вернутся домой</UIButton>
+      <UIButton @click="handleError" class="w-full">Вернуться домой</UIButton>
     </div>
   </div>
 </template>

@@ -11,11 +11,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 const classList = computed(() => {
   return [
-    "py-2 px-4 rounded-lg text-[15px] flex items-center gap-1 justify-center transition-opacity hover:opacity-70",
+    "py-2 px-4 rounded-lg text-[15px] flex items-center gap-1 justify-center select-none",
+    "transition-colors duration-200",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     {
-      "bg-primary text-white": props.variant === "primary",
-      "bg-white text-primary-dark border border-primary":
+      "bg-primary text-white hover:bg-primary-dark focus-visible:ring-primary/60 focus-visible:ring-offset-white":
+        props.variant === "primary",
+      "bg-white text-primary-dark border border-primary hover:bg-primary/5 hover:border-primary-dark focus-visible:ring-primary/50 focus-visible:ring-offset-white":
         props.variant === "secondary",
+      "hover:opacity-80 focus-visible:ring-white/70 focus-visible:ring-offset-transparent":
+        props.variant === "naked",
     },
   ];
 });
@@ -31,7 +36,7 @@ const buttonComponent = computed(() => {
     :is="buttonComponent"
     :class="classList"
     :to="to"
-    active-class="opacity-70"
+    active-class="opacity-80"
   >
     <slot />
   </component>

@@ -14,14 +14,16 @@ const props = defineProps<Props>();
 const classList = computed(() => {
   return {
     input: [
-      "w-full block border rounded h-[40px] transition outline-none focus:ring focus:ring-primary px-3",
+      "w-full block border border-gray-card-200 rounded-lg h-[40px] px-3 bg-white",
+      "transition-[border-color,box-shadow] duration-200 ease-expo outline-none",
+      "hover:border-gray-text/40 focus:border-primary focus:ring-2 focus:ring-primary/40",
     ],
   };
 });
 
 const value = inject("value");
 
-let maskInputInstance;
+let maskInputInstance: MaskInput | undefined;
 
 const input = ref();
 
@@ -35,7 +37,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (props.mask) {
-    maskInputInstance.destroy();
+    maskInputInstance?.destroy();
   }
 });
 </script>

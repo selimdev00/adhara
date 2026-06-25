@@ -11,7 +11,7 @@ const validationSchema = object().shape({
 
 const { handleSubmit, resetForm } = useForm({ validationSchema });
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(() => {
   useNuxtApp().$toast.info("Данные отправлены");
   resetForm();
   return navigateTo("/");
@@ -19,27 +19,42 @@ const onSubmit = handleSubmit((values) => {
 </script>
 
 <template>
-  <div class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="flex items-center justify-center min-h-[70vh] px-4 py-12">
     <form
       @submit.prevent="onSubmit"
-      class="shadow bg-gray-card-100 border-gray-card-200 border space-y-4 p-4 rounded-lg min-w-[400px]"
+      class="shadow-card bg-gray-card-100 border-gray-card-200 border space-y-4 p-6 rounded-lg w-full max-w-[400px]"
     >
       <div class="space-y-1">
         <h1 class="font-bold text-2xl text-center">Войти</h1>
 
-        <UIFormField name="phoneNumber" label="Номер телефона" v-slot="{ id }">
+        <UIFormField
+          v-slot="{ id, invalid, describedby }"
+          name="phoneNumber"
+          label="Номер телефона"
+        >
           <UIFormInputText
+            :id="id"
             placeholder="Введите номер телефона"
             mask="+7 (###) ###-##-##"
-            :id="id"
+            type="tel"
+            autocomplete="tel"
+            :aria-invalid="invalid"
+            :aria-describedby="describedby"
           />
         </UIFormField>
 
-        <UIFormField name="password" label="Пароль" v-slot="{ id }">
+        <UIFormField
+          v-slot="{ id, invalid, describedby }"
+          name="password"
+          label="Пароль"
+        >
           <UIFormInputText
+            :id="id"
             placeholder="Введите пароль"
             type="password"
-            :id="id"
+            autocomplete="current-password"
+            :aria-invalid="invalid"
+            :aria-describedby="describedby"
           />
         </UIFormField>
       </div>
